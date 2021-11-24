@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $nome = $_POST["nome"];
 $preco = $_POST["preco"];
 $peso = $_POST["peso"];
@@ -11,33 +13,28 @@ $data_validade = $_POST["data_validade"];
 $descricao = $_POST["descricao"];
 $acao = $_REQUEST["acao"];
 
-echo "Nome: $nome <br>";
-echo "preco: $preco <br>";
-echo "peso: $peso <br>";
-echo "lote: $lote <br>";
-echo "categoria: $categoria <br>";
-echo "url: $url <br>";
-echo "barras: $cod_barra <br>";
-echo "fabricação: $data_fabricacao <br>";
-echo "validade: $data_validade<br>";
-echo "descrição: $descricao<br>";
-echo "Acao: $acao<br>";
-
 switch ($acao) {
     case "cadastrar":
         $queryProduto = "insert into produto (nome, preco, peso, lote, categoria, url, descricao, data_fabricacao, data_validade,
                      codigo_barra)
-                    values ('$nome', $preco, $peso, $lote, '$categoria', '$url', '$categoria', '$data_fabricacao', '$data_validade', $cod_barra)";
-        echo $queryProduto;
+                    values ('$nome', $preco, $peso, $lote, $categoria, '$url', '$descricao', '$data_fabricacao', '$data_validade', $cod_barra)";
+
         $result = $conn->query($queryProduto);
-        echo 'depois';
-        var_dump($result);
+
         if ($result) {
-            print "<script>messageSuccess();</script>";
+            $_SESSION['mensagem'] = [
+                'status' => "success",
+                'msg' => 'Salvo com sucesso.',
+            ];
         } else {
-            print "<script>messageError();</script>";
+            $_SESSION['mensagem'] = [
+                'status' => "error",
+                'msg' => 'Error ao salvar.',
+            ];
+
         }
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . '?page=lista-produtos');
         break;
 }
-
 ?>
+

@@ -9,3 +9,8 @@ body{
     margin-bottom: 10px;
 }
 
+.is-center{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}

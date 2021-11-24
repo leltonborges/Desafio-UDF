@@ -11,6 +11,7 @@ $conn = new mysqli(HOST,USER, PASS,BASE);
 
 //Checando conexão
 if (!$conn) {
+    echo "Erro de coneção com o banco";
     die("Falha na conexão: " . mysli_connect_error());
 }
 ?>

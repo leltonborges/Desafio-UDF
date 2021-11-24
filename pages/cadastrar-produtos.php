@@ -1,3 +1,20 @@
+<?php
+$id =@$_REQUEST["id"];
+$action = @$_REQUEST["action"];
+
+if(isset($id)){
+    $queryProdID= "SELECT p.id, p.nome, p.preco, p.peso, p.lote , p.categoria, p.url,
+                    p.descricao, p.data_fabricacao, p.data_validade, p.codigo_barra 
+                    FROM produto p
+                WHERE  p.id = $id";
+    if($action == "edit"){
+        $result = $conn->query($queryProdID);
+        $obj = $result->fetch_object();
+    }
+}
+
+?>
+
 <nav class="breadcrumb" aria-label="breadcrumbs">
     <ul>
         <li><a href="index.php">Home</a></li>
@@ -6,12 +23,14 @@
 </nav>
 
 <form class="box" method="post" action="?page=salvar-produtos">
-    <input type="hidden" name="acao" value="cadastrar">
+    <input type="hidden" name="acao" value="<?php echo isset($id)? "editar" : "cadastrar"?>">
+    <?php if(isset($id)) echo "<input type='hidden' name='id' value=''$obj->id'>"?>
     <div class="columns">
         <div class="field column">
             <label class="label">Nome do produto</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input" type="text" placeholder="nome do produto" required="required" name="nome">
+                <input class="input" type="text" placeholder="nome do produto" required="required"
+                       name="nome" value="<?php if(isset($obj->nome)) echo $obj->nome ?>">
                 <span class="icon is-small is-left">
                     <i class="fas fa-file-signature"></i>
                 </span>
@@ -21,7 +40,8 @@
         <div class="field column">
             <label class="label">Preço</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input" type="number" step="0.01" placeholder="0.0" required="required" name="preco">
+                <input class="input" type="number" step="0.01" placeholder="0.0" required="required"
+                       name="preco" value="<?php if(isset($obj->preco)) echo $obj->preco ?>">
                 <span class="icon is-small is-left">
                     <i class="fas fa-coins"></i>
                 </span>
@@ -32,7 +52,8 @@
         <div class="field column">
             <label class="label">Peso líquido</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input" type="number" step="0.01" placeholder="0.0" required="required" name="peso">
+                <input class="input" type="number" step="0.01" placeholder="0.0" required="required"
+                       name="peso" value="<?php if(isset($obj->peso)) echo $obj->peso ?>">
                 <span class="icon is-small is-left">
                     <i class="fas fa-balance-scale"></i>
                 </span>
@@ -42,7 +63,8 @@
         <div class="field column">
             <label class="label">Lote</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input" type="number" min="1" placeholder="numero do lote" required="required" name="lote">
+                <input class="input" type="number" min="1" placeholder="numero do lote" required="required"
+                       name="lote" value="<?php if(isset($obj->lote)) echo $obj->lote ?>">
                 <span class="icon is-small is-left">
                     <i class="fas fa-not-equal"></i>
                 </span>
@@ -54,15 +76,15 @@
             <div class="control">
                 <div class="select">
                     <select required="required" name="categoria">
-                        <option selected>selecione</option>
-                        <option>Café da manhã/Padaria</option>
-                        <option>Mercearia em geral e enlatados</option>
-                        <option>Bebidas</option>
-                        <option>Carnes e frios</option>
-                        <option>Produtos de limpeza/Utilidades</option>
-                        <option>Higiene pessoal</option>
-                        <option>Frutas e legumes</option>
-                        <option>Pet</option>
+                        <option>selecione</option>
+                        <option value="1" <?php if(isset($obj->categoria) && $obj->categoria == "1") {echo "selected";} ?>>Café da manhã/Padaria</option>
+                        <option value="2" <?php if(isset($obj->categoria) && $obj->categoria == "2") {echo "selected";} ?>>Mercearia em geral e enlatados</option>
+                        <option value="3" <?php if(isset($obj->categoria) && $obj->categoria == "3") {echo "selected";} ?>>Bebidas</option>
+                        <option value="4" <?php if(isset($obj->categoria) && $obj->categoria == "4") {echo "selected";} ?>>Carnes e frios</option>
+                        <option value="5" <?php if(isset($obj->categoria) && $obj->categoria == "5") {echo "selected";} ?>>Produtos de limpeza/Utilidades</option>
+                        <option value="6" <?php if(isset($obj->categoria) && $obj->categoria == "6") {echo "selected";} ?>>Higiene pessoal</option>
+                        <option value="7" <?php if(isset($obj->categoria) && $obj->categoria == "7") {echo "selected";} ?>>Frutas e legumes</option>
+                        <option value="8" <?php if(isset($obj->categoria) && $obj->categoria == "8") {echo "selected";} ?>>Pet</option>
                     </select>
                 </div>
             </div>
@@ -73,7 +95,7 @@
             <label class="label">Url do produto</label>
             <div class="control has-icons-left has-icons-right">
                 <input class="input" type="text" placeholder="https://examplo.com/image.jpg" required="required"
-                       name="url">
+                       name="url"  value="<?php if(isset($obj->url)) echo $obj->url ?>">
                 <span class="icon is-small is-left">
                     <i class="fas fa-link"></i>
                 </span>
@@ -84,7 +106,7 @@
             <label class="label">Codigo de barra</label>
             <div class="control has-icons-left has-icons-right">
                 <input class="input" type="number" placeholder="0000000000000000000000000000" required="required"
-                       name="cod_barra">
+                       name="cod_barra" value="<?php if(isset($obj->codigo_barra)) echo $obj->codigo_barra ?>">
                 <span class="icon is-small is-left">
                     <i class="fas fa-barcode"></i>
                 </span>
@@ -95,7 +117,8 @@
         <div class="field column">
             <label class="label">Data de fabricação</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input" type="date" required="required" name="data_fabricacao">
+                <input class="input" type="date" required="required"
+                       name="data_fabricacao" value="<?php if(isset($obj->data_fabricacao)) echo $obj->data_fabricacao ?>">
                 <span class="icon is-small is-left">
                     <i class="fas fa-calendar-week"></i>
                 </span>
@@ -105,7 +128,8 @@
         <div class="field column">
             <label class="label">Data de validade</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input" type="date" required="required" name="data_validade">
+                <input class="input" type="date" required="required"
+                       name="data_validade" value="<?php if(isset($obj->data_validade)) echo $obj->data_validade ?>">
                 <span class="icon is-small is-left">
                     <i class="fas fa-calendar-week"></i>
                 </span>
@@ -115,7 +139,8 @@
     <div class="field">
         <label class="label">Descrição</label>
         <div class="control">
-            <textarea class="textarea" placeholder="Textarea" required="required" name="descricao"></textarea>
+            <textarea class="textarea" placeholder="Textarea" required="required"
+                      name="descricao"><?php if(isset($obj->descricao)) echo $obj->descricao ?></textarea>
         </div>
     </div>
 
@@ -181,7 +206,7 @@
     </div>
     <div class="field is-grouped">
         <div class="control">
-            <button class="button is-link">Cadastrar</button>
+            <button class="button is-link" type="submit"><?php echo isset($obj->id)? 'Atualizar': 'Cadastrar' ?></button>
         </div>
         <div class="control">
             <a class="button is-link is-light" href="?page=lista-produtos">Cancelar</a>

@@ -1,3 +1,8 @@
+<?php
+include_once 'config.php';
+
+$path = @$_GET["page"];
+?>
 <!doctype html>
 <html lang="pt-br">
 <head>
@@ -6,10 +11,15 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="css/main.css">
     <script src="js/main.js" async></script>
+    <?php
+    if($path == "lista-produtos") echo "<script src=\"js/lista.js\" async ></script>";
+    if($path == "cadastrar-produtos") echo "<script src=\"js/cadastrar.js\" async ></script>";
+    ?>
     <title>Desafio</title>
 </head>
 <body>
@@ -48,20 +58,17 @@
     <div class="notification is-primary">
         <h2 class="subtitle">Implementação de um CRUD simples de uma tabela solicitada pelo mentor</h2>
     </div>
-    <div id="message"></div>
     <div class="container">
         <?php
-        include_once 'config.php';
-
-        $path = @$_GET["page"];
-        if($path != null){
+        if ($path != null) {
             include("pages/$path.php");
-        }else{
+        } else {
             include("pages/main.php");
         }
         ?>
-
     </div>
 </div>
+
 </body>
+
 </html>

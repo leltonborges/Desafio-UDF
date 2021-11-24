@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+$id = $_POST["id"];
 $nome = $_POST["nome"];
 $preco = $_POST["preco"];
 $peso = $_POST["peso"];
@@ -30,6 +31,28 @@ switch ($acao) {
             $_SESSION['mensagem'] = [
                 'status' => "error",
                 'msg' => 'Error ao salvar.',
+            ];
+
+        }
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . '?page=lista-produtos');
+        break;
+    case "editar":
+        $queryUpdate = "UPDATE desafio.produto
+                        SET nome='$nome', preco=$preco, peso=$peso, lote=$lote, categoria=$categoria,
+                            url='$url', descricao='$descricao', data_fabricacao='$data_fabricacao', data_validade='$data_validade',
+                            codigo_barra=$cod_barra WHERE id=$id";
+
+        $result = $conn->query($queryUpdate);
+
+        if ($result) {
+            $_SESSION['mensagem'] = [
+                'status' => "success",
+                'msg' => 'Atualizado com sucesso.',
+            ];
+        } else {
+            $_SESSION['mensagem'] = [
+                'status' => "error",
+                'msg' => 'Error ao atualizar.',
             ];
 
         }

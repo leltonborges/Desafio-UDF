@@ -55,9 +55,6 @@ $path = @$_GET["page"];
         </div>
     </nav>
     <h1 class="title">Desafio</h1>
-    <div class="notification is-primary">
-        <h2 class="subtitle">Implementação de um CRUD simples de uma tabela solicitada pelo mentor</h2>
-    </div>
     <div class="container">
         <?php
         if ($path != null) {

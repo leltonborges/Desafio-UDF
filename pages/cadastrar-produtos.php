@@ -24,7 +24,7 @@ if(isset($id)){
 
 <form class="box" method="post" action="?page=salvar-produtos">
     <input type="hidden" name="acao" value="<?php echo isset($id)? "editar" : "cadastrar"?>">
-    <?php if(isset($id)) echo "<input type='hidden' name='id' value=''$obj->id'>"?>
+    <?php if(isset($id)) echo "<input type='hidden' name='id' value='$obj->id'>"?>
     <div class="columns">
         <div class="field column">
             <label class="label">Nome do produto</label>

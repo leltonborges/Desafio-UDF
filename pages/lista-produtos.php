@@ -52,7 +52,7 @@ $result = $conn->query($queryProdutos);
     </tr>
     </thead>
 
-    <tbody>http://localhost:63342/web-desafio-3-pontos/index.php?page=cadastrar-produtos
+    <tbody>
     <?php
     while ($obj = $result->fetch_object()){
         echo "<tr>";

@@ -68,7 +68,7 @@ $result = $conn->query($queryProdutos);
         echo "<td>$obj->codigo_barra</td>";
         echo "<td>
                 <a class='button is-link is-light is-warning'
-                  href='?page=cadastrar-produtos&action=edit&id=$obj->id'>
+                  href='?page=cadastrar-produtos&acao=edit&id=$obj->id'>
                   <span class='icon is-center'>
                     <i class='fas fa-edit'></i>
                   </span>
@@ -77,7 +77,7 @@ $result = $conn->query($queryProdutos);
               </td>";
         echo "<td>
                 <a class='button is-link is-light is-danger'
-                    href='?page=salvar-produtos&action=delete&id=$obj->id'>
+                    href='?page=salvar-produtos&acao=delete&id=$obj->id'>
                   <span class='icon is-center'>
                     <i class='fas fa-trash-alt'></i>
                   </span>

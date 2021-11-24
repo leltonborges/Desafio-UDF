@@ -1,6 +1,38 @@
-<h1>Main</h1>
-
 <?php
-
-//var_dump($_SERVER);
+$queryLast10 = "SELECT p.id ,p.nome , p.preco , p.categoria from produto p order by p.id desc limit 10";
+$result = $conn->query($queryLast10);
+while ($obj = $result->fetch_object()){
 ?>
+<div class="columns">
+    <div class="card column is-half">
+        <div class="card-image">
+            <figure class="image is-4by3">
+                <img src="<?php $obj->url?>" alt="<?php $obj->nome ?>">
+            </figure>
+        </div>
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-48x48">
+                        <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-4">John Smith</p>
+                    <p class="subtitle is-6">@johnsmith</p>
+                </div>
+            </div>
+
+            <div class="content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+                <a href="#">#css</a> <a href="#">#responsive</a>
+                <br>
+                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+}
+    ?>

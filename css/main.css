@@ -1,0 +1,11 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
+body{
+    margin-top: 10px;
+}
+
+.navbar{
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+

@@ -9,8 +9,8 @@ body{
     margin-bottom: 10px;
 }
 
-.is-center{
-    display: flex;
-    justify-content: center;
-    align-content: center;
+.card.column{
+    margin: 10px;
+    max-width: 20vw;
+    min-width: 20vw;
 }

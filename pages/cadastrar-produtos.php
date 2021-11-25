@@ -1,12 +1,13 @@
 <?php
 $id =@$_REQUEST["id"];
-$action = @$_REQUEST["action"];
+$action = @$_REQUEST["acao"];
 
 if(isset($id)){
     $queryProdID= "SELECT p.id, p.nome, p.preco, p.peso, p.lote , p.categoria, p.url,
                     p.descricao, p.data_fabricacao, p.data_validade, p.codigo_barra 
-                    FROM produto p
+                    FROM produto as p
                 WHERE  p.id = $id";
+;
     if($action == "edit"){
         $result = $conn->query($queryProdID);
         $obj = $result->fetch_object();

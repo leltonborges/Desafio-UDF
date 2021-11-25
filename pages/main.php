@@ -1,38 +1,37 @@
+<h2 class="subtitle">Os ultimos 10 produtos cadastrados</h2>
 <?php
-$queryLast10 = "SELECT p.id ,p.nome , p.preco , p.categoria from produto p order by p.id desc limit 10";
+$queryLast10 = "SELECT p.id, p.nome, p.preco, p.peso, p.lote , p.categoria, p.url, 
+                p.descricao, p.data_fabricacao, p.data_validade, p.codigo_barra 
+                FROM produto as p 
+                order by p.id desc limit 10";
 $result = $conn->query($queryLast10);
-while ($obj = $result->fetch_object()){
-?>
-<div class="columns">
-    <div class="card column is-half">
+
+echo "<div class='columns is-flex-wrap-wrap is-flex-direction-row'>";
+while ($obj = $result->fetch_object()) {
+    ?>
+    <div class="card column">
         <div class="card-image">
-            <figure class="image is-4by3">
-                <img src="<?php $obj->url?>" alt="<?php $obj->nome ?>">
+            <figure class="image is-1by1">
+                <img src="<?php echo $obj->url; ?>" alt="<?php echo $obj->nome; ?>">
             </figure>
         </div>
         <div class="card-content">
             <div class="media">
-                <div class="media-left">
-                    <figure class="image is-48x48">
-                        <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                    </figure>
-                </div>
                 <div class="media-content">
-                    <p class="title is-4">John Smith</p>
-                    <p class="subtitle is-6">@johnsmith</p>
+                    <p class="title is-4"><?php echo $obj->nome; ?></p>
+                    <p class="subtitle is-6">R$ <?php echo $obj->preco; ?></p>
                 </div>
             </div>
 
             <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                <a href="#">#css</a> <a href="#">#responsive</a>
+                <?php echo $obj->descricao; ?>
                 <br>
-                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                <time datetime="<?php $obj->data_fabricacao ?>">Fabricação: <?php echo $obj->data_fabricacao; ?></time>
+                <time datetime="<?php $obj->data_validade ?>">Validade: <?php echo $obj->data_validade; ?></time>
             </div>
         </div>
     </div>
-</div>
-<?php
+    <?php
 }
-    ?>
+?>
+</div>

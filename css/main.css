@@ -11,6 +11,4 @@ body{
 
 .card.column{
     margin: 10px;
-    max-width: 20vw;
-    min-width: 20vw;
 }

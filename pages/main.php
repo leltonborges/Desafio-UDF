@@ -9,7 +9,7 @@ $result = $conn->query($queryLast10);
 echo "<div class='columns is-flex-wrap-wrap is-flex-direction-row'>";
 while ($obj = $result->fetch_object()) {
     ?>
-    <div class="card column">
+    <div class="card column is-one-quarter">
         <div class="card-image">
             <figure class="image is-1by1">
                 <img src="<?php echo $obj->url; ?>" alt="<?php echo $obj->nome; ?>">

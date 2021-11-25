@@ -6,10 +6,10 @@ $queryLast10 = "SELECT p.id, p.nome, p.preco, p.peso, p.lote , p.categoria, p.ur
                 order by p.id desc limit 10";
 $result = $conn->query($queryLast10);
 
-echo "<div class='columns is-flex-wrap-wrap is-flex-direction-row'>";
+echo "<div class='columns is-flex-wrap-wrap is-flex-direction-row is-justify-content-space-evenly'>";
 while ($obj = $result->fetch_object()) {
     ?>
-    <div class="card column is-one-quarter">
+    <div class="card column is-3">
         <div class="card-image">
             <figure class="image is-1by1">
                 <img src="<?php echo $obj->url; ?>" alt="<?php echo $obj->nome; ?>">

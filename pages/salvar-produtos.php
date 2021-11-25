@@ -54,7 +54,6 @@ switch ($acao) {
                 'status' => "error",
                 'msg' => 'Error ao atualizar.',
             ];
-
         }
         header('Location: http://' . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . '?page=lista-produtos');
         break;
